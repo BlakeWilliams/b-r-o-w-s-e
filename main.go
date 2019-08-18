@@ -8,20 +8,47 @@ package main
 import "C"
 
 import (
+	"io/ioutil"
 	"os/exec"
+	"os/user"
 )
 
 var urlListener chan string
 
+// TODOS
+// cocoa alert instead of panic
+// default config file copied when missing
+
 func main() {
+	config := loadConfig()
+
 	urlListener = make(chan string)
 	go C.RunApp()
 	url := <-urlListener
 
-	browser := "Safari"
-	cmd := exec.Command("open", "-a", browser, url)
+	browser := config.GetBrowserForUrl(url)
+	cmd := exec.Command("open", "-a", browser.Path, url)
 
 	cmd.Run()
+}
+
+func loadConfig() Config {
+	content, err := ioutil.ReadFile(homeDir() + "/.config/b-r-o-w-s-e/config.json")
+
+	if err != nil {
+		panic(err)
+	}
+
+	return ParseConfig(string(content))
+}
+
+func homeDir() string {
+	currentUser, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+
+	return currentUser.HomeDir
 }
 
 //export HandleURL
