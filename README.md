@@ -25,6 +25,7 @@ Here's a sample config file to build on:
     { "name": "Firefox", "path": "/Applications/Firefox.app" }
   ],
   "matchers": [
+    { "regexp": "https?://localhost", "browser": "Chrome" },
     { "regexp": "https?.*?github.com", "browser": "Chrome" }
   ]
 }
