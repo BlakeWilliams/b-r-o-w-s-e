@@ -1,6 +1,3 @@
-#ifndef BROWSE_H
-#define BROWSE_H
-
 #import <Cocoa/Cocoa.h>
 
 extern void HandleURL(char*);
@@ -9,7 +6,5 @@ extern void HandleURL(char*);
   - (void)handleGetURLEvent:(NSAppleEventDescriptor *) event withReplyEvent:(NSAppleEventDescriptor *)replyEvent;
 @end
 
-void RunApp(void);
+void RunApp();
 void ShowAlert(char*, char*);
-
-#endif

@@ -9,12 +9,13 @@ import "C"
 
 import (
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"os/user"
 	"time"
 )
 
-var urlListener chan string
+var urlListener chan string = make(chan string)
 
 // TODOS
 // default config file copied when missing
@@ -22,17 +23,21 @@ var urlListener chan string
 func main() {
 	config := loadConfig()
 
-	urlListener = make(chan string)
-	go C.RunApp()
+	go func() {
+		timeout := time.After(4 * time.Second)
+		select {
+		case url := <-urlListener:
+			browser := config.GetBrowserForUrl(url)
+			cmd := exec.Command("open", "-a", browser.Path, url)
 
-	select {
-	case url := <-urlListener:
-		browser := config.GetBrowserForUrl(url)
-		cmd := exec.Command("open", "-a", browser.Path, url)
+			cmd.Run()
+			os.Exit(0)
+		case <-timeout:
+			os.Exit(1)
+		}
+	}()
 
-		cmd.Run()
-	case <-time.After(1 * time.Second):
-	}
+	C.RunApp()
 }
 
 func loadConfig() Config {
