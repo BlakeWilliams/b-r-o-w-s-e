@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"os/exec"
 	"os/user"
+	"time"
 )
 
 var urlListener chan string
@@ -23,12 +24,15 @@ func main() {
 
 	urlListener = make(chan string)
 	go C.RunApp()
-	url := <-urlListener
 
-	browser := config.GetBrowserForUrl(url)
-	cmd := exec.Command("open", "-a", browser.Path, url)
+	select {
+	case url := <-urlListener:
+		browser := config.GetBrowserForUrl(url)
+		cmd := exec.Command("open", "-a", browser.Path, url)
 
-	cmd.Run()
+		cmd.Run()
+	case <-time.After(1 * time.Second):
+	}
 }
 
 func loadConfig() Config {
