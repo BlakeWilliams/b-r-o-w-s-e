@@ -16,7 +16,7 @@
 
 - (void)handleGetURLEvent:(NSAppleEventDescriptor *)event
            withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-  HandleURL([[[event paramDescriptorForKeyword:keyDirectObject] stringValue] UTF8String]);
+  HandleURL((char*)[[[event paramDescriptorForKeyword:keyDirectObject] stringValue] UTF8String]);
 }
 @end
 
