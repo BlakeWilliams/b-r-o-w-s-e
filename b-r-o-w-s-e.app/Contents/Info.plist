@@ -8,12 +8,6 @@
     <string>com.blakeorwhatever.browse</string>
     <key>CFBundleName</key>
     <string>b-r-o-w-s-e</string>
-    <key>NSPrincipalClass</key>
-    <string>BrowserCrApplication</string>
-    <key>NSUserActivityTypes</key>
-    <array>
-      <string>NSUserActivityTypeBrowsingWeb</string>
-    </array>
     <key>CFBundleDocumentTypes</key>
     <array>
       <dict>
@@ -303,6 +297,34 @@
           <string>file</string>
         </array>
       </dict>
+    </array>
+    <key>CFBundleVersion</key>
+    <string>3809.100</string>
+    <key>DTSDKName</key>
+    <string>macosx10.13</string>
+    <key>DTXcode</key>
+    <string>0931</string>
+    <key>DTXcodeBuild</key>
+    <string>9E501</string>
+    <key>KSProductID</key>
+    <string>com.blakeorwhatever.browse</string>
+    <key>KSVersion</key>
+    <string>2.0.0</string>
+    <key>LSFileQuarantineEnabled</key>
+    <true/>
+    <key>LSHasLocalizedDisplayName</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.10.0</string>
+    <key>NSPrincipalClass</key>
+    <string>BrowserCrApplication</string>
+    <key>NSRequiresAquaSystemAppearance</key>
+    <false/>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <false/>
+    <key>NSUserActivityTypes</key>
+    <array>
+      <string>NSUserActivityTypeBrowsingWeb</string>
     </array>
   </dict>
 </plist>
