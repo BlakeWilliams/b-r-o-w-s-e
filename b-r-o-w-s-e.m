@@ -23,7 +23,7 @@
 void RunApp(void) {
   [NSAutoreleasePool new];
   [NSApplication sharedApplication];
-  [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+  [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
   BrowseAppDelegate *app = [BrowseAppDelegate alloc];
   [NSApp setDelegate:app];
   [NSApp run];
