@@ -16,7 +16,6 @@ import (
 var urlListener chan string
 
 // TODOS
-// cocoa alert instead of panic
 // default config file copied when missing
 
 func main() {
@@ -36,6 +35,11 @@ func loadConfig() Config {
 	content, err := ioutil.ReadFile(homeDir() + "/.config/b-r-o-w-s-e/config.json")
 
 	if err != nil {
+		ShowError(
+			"Could not load config",
+			"Try creating a config file in ~/.config/b-r-o-w-s-e/config.json",
+		)
+
 		panic(err)
 	}
 
@@ -45,10 +49,21 @@ func loadConfig() Config {
 func homeDir() string {
 	currentUser, err := user.Current()
 	if err != nil {
+		ShowError(
+			"Could not load home directory",
+			err.Error(),
+		)
 		panic(err)
 	}
 
 	return currentUser.HomeDir
+}
+
+func ShowError(title string, details string) {
+	C.ShowAlert(
+		C.CString(title),
+		C.CString(details),
+	)
 }
 
 //export HandleURL

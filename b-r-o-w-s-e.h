@@ -10,5 +10,6 @@ extern void HandleURL(char*);
 @end
 
 void RunApp(void);
+void ShowAlert(char*, char*);
 
 #endif

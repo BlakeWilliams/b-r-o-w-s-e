@@ -23,8 +23,18 @@
 void RunApp(void) {
   [NSAutoreleasePool new];
   [NSApplication sharedApplication];
-  [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
   BrowseAppDelegate *app = [BrowseAppDelegate alloc];
   [NSApp setDelegate:app];
   [NSApp run];
+}
+
+void ShowAlert(char* cmessage, char* cdetails) {
+  NSString *message = [NSString stringWithCString:cmessage encoding:NSUTF8StringEncoding];
+  NSString *details = [NSString stringWithCString:cdetails encoding:NSUTF8StringEncoding];
+
+  NSAlert *alert = [[NSAlert alloc] init];
+  [alert setMessageText:message];
+  [alert setInformativeText:details];
+  [alert addButtonWithTitle:@"Okay"];
+  [alert runModal];
 }

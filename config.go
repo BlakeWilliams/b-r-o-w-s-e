@@ -26,6 +26,10 @@ func ParseConfig(configJson string) Config {
 
 	err := json.Unmarshal([]byte(configJson), &config)
 	if err != nil {
+		ShowError(
+			"Couldn't parse config file",
+			err.Error(),
+		)
 		panic(err)
 	}
 
@@ -39,7 +43,11 @@ func (config Config) GetBrowser(name string) Browser {
 		}
 	}
 
-	panic("could not find browser")
+	ShowError(
+		"Couldn't find browser",
+		"Couldn't find browser with name: "+name,
+	)
+	panic("couldn't find browser with name " + name)
 }
 
 func (config Config) GetDefaultBrowser() Browser {
@@ -51,6 +59,10 @@ func (config Config) GetBrowserForUrl(url string) Browser {
 		regex, err := regexp.Compile(matcher.Regexp)
 
 		if err != nil {
+			ShowError(
+				"Couldn't compile regex",
+				matcher.Regexp,
+			)
 			panic(err)
 		}
 
