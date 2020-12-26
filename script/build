@@ -5,6 +5,3 @@ set -e
 go clean
 go build .
 cp b-r-o-w-s-e b-r-o-w-s-e.app/Contents/b-r-o-w-s-e
-cp -r b-r-o-w-s-e.app /Applications
-
-echo "Installed b-r-o-w-s-e.app in /Applications"
